@@ -1,13 +1,7 @@
 
+import { useMemo, memo, useState } from "react";
 import {List} from "react-window";
-
-function App() {
-  const n = 1000;
-  const images = Array(n).fill(0).map((_, i) => {
-    return `https://picsum.photos/300/200?random=${i}`
-  })
-
-  const Row = ({ index, style , images}) => (
+const Row = memo(({ index, style , images}) => (
     <div style={style}>  {/* style is REQUIRED — controls positioning */}
       <img
         loading="lazy"
@@ -17,16 +11,28 @@ function App() {
         alt={`img-${index}`}
       />
     </div>
-  );
+));
 
-  return (
+function App() {
+  const [count, setCount] = useState(0)
+
+  const n = 1000;
+  const images = useMemo(()=> {
+    return  Array(n).fill(0).map((_, i) => {
+      return `https://picsum.photos/300/200?random=${i}`
+    })
+  }, []) 
+
+  return (<>
+    <button onClick={() => setCount(prev => prev + 1)}>{count}</button>
     <List
       rowComponent={Row}
       rowCount={n}       // total number of items
       rowHeight={100}      // height of each row in px
       rowProps={{images: images}}
-      style={{height: '100px'}}
+      style={{height: window.innerHeight}}
     />
+  </>
 
   );
 }
