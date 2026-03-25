@@ -9,7 +9,7 @@ function App() {
 
   return (
     images?.map((x, i) => {
-       return <img width={100} height={100} key={i} src={`https://picsum.photos/300/200?random=${1}`} alt={`img-${i}`}/>
+       return <img width={100} height={100} key={i} src={`https://picsum.photos/300/200?random=${i}`} alt={`img-${i}`}/>
     })
   )
 }
