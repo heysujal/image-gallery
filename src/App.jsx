@@ -30,7 +30,13 @@ function App() {
     <>
       <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>
 
-      <List rowComponent={Row} rowCount={n} rowHeight={100} rowProps={{ images }} />
+      <List 
+          rowComponent={Row} 
+          rowCount={n} 
+          rowHeight={100} 
+          rowProps={{ images }} 
+          style={{height: window.innerHeight}}
+      />
 
       {!showFooter ? (
         <button onClick={() => setShowFooter(true)}>Load footer (lazy)</button>
